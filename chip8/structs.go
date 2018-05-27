@@ -63,3 +63,16 @@ func (c *C8) Draw() {
 func NewC8() *C8 {
 	return &C8{}
 }
+
+// fetchOpcode gets the next opcode in memory, based on the
+// current pc
+func (c *C8) fetchOpcode() uint16 {
+	// an opcode on the CHIP-8 is composed of two bytes
+	// in continguous memory
+	opcode1 := uint16(c.memory[c.pc])
+	opcode2 := uint16(c.memory[c.pc+1])
+
+	// merge the two bytes together
+	fullOpcode := opcode1<<8 | opcode2
+	return fullOpcode
+}
