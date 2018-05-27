@@ -2,6 +2,10 @@ package chip8
 
 // C8 holds the state of a chip-8 CPU
 type C8 struct {
+	// DrawFlag if set, tells the invoker
+	// that something is ready to draw
+	DrawFlag bool
+
 	// CHIP-8 has 4K memory
 	memory [4096]uint8
 
@@ -29,8 +33,29 @@ type C8 struct {
 	keypad [16]uint8
 }
 
-// Initialize sets up the CHIP instance
-func (c *C8) Initialize() {
+// LoadGame loads the ROM on the given
+// path
+func (c *C8) LoadGame(path string) {
+
+}
+
+// GetKeyInput reads the input from the
+// keyboard or buttons, and sets them as input
+// for the next cycle
+func (c *C8) GetKeyInput() {
+
+}
+
+// EmulateCycle runs the chip for one cycle, taking
+// in any opcodes defined in the game, and executes
+// them
+func (c *C8) EmulateCycle() {
+
+}
+
+// Draw draws the current framebuffer
+func (c *C8) Draw() {
+
 }
 
 // NewC8 creates a new CHIP-8 instance, with all

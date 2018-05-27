@@ -35,4 +35,13 @@ var keypad [16]uint8
 func main() {
 	fmt.Println("Hello CHIP-8!")
 	chip := chip8.NewC8()
+
+	for {
+		chip.EmulateCycle()
+
+		if chip.DrawFlag {
+			chip.Draw()
+		}
+		chip.GetKeyInput()
+	}
 }
