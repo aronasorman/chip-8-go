@@ -50,7 +50,8 @@ func (c *C8) GetKeyInput() {
 // in any opcodes defined in the game, and executes
 // them
 func (c *C8) EmulateCycle() {
-
+	opcode := c.fetchOpcode()
+	c.executeOpcode(opcode)
 }
 
 // Draw draws the current framebuffer
@@ -75,4 +76,12 @@ func (c *C8) fetchOpcode() uint16 {
 	// merge the two bytes together
 	fullOpcode := opcode1<<8 | opcode2
 	return fullOpcode
+}
+	// merge the two bytes together
+	fullOpcode := opcode1<<8 | opcode2
+	return fullOpcode
+}
+
+func (c *C8) executeOpcode(opcode uint16) {
+	c.execOpcode(opcode)
 }
