@@ -62,7 +62,11 @@ func (c *C8) Draw() {
 // NewC8 creates a new CHIP-8 instance, with all
 // systems initialized
 func NewC8() *C8 {
-	return &C8{}
+	return &C8{
+		pc: 0x200,
+	}
+
+	// load fontset on to 0x80 in memory
 }
 
 // fetchOpcode gets the next opcode in memory, based on the
