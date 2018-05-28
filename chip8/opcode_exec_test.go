@@ -53,6 +53,24 @@ func TestC8_execOpcode(t *testing.T) {
 			},
 		},
 		{
+			name: "test 2NNN opcode (subroutine call)",
+			args: args{
+				opcode: 0x2AAA,
+			},
+			fields: fields{
+				pc:    0x200,
+				stack: NewStack(),
+			},
+			want: &C8{
+				pc: 0xAAA,
+				stack: func() *Stack {
+					s := NewStack()
+					s.Push(0x200)
+					return s
+				}(),
+			},
+		},
+		{
 			name: "test 00E0 opcode (clears the screen)",
 			args: args{
 				opcode: 0x00E0,

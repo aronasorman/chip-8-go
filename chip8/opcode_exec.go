@@ -30,6 +30,11 @@ func (c *C8) execOpcode(opcode uint16) *C8 {
 		// subtract two, to take into account the
 		// other +2 increment at the end of this function
 		c.pc -= 2
+	// the 2NNN opcode is a 'subroutine' jump, where we
+	// add the current pc to the stack before jumping
+	case 0x2:
+		c.subroutineCall(opcode & 0x0FFF)
+		c.pc -= 2
 	}
 
 	// after executing the opcode, advance
@@ -64,4 +69,13 @@ func (c *C8) popStack() {
 	}
 
 	c.pc = pc
+}
+
+func (c *C8) pushStack(val uint16) {
+	c.stack.Push(val)
+}
+
+func (c *C8) subroutineCall(addr uint16) {
+	c.pushStack(c.pc)
+	c.jumpTo(addr)
 }
