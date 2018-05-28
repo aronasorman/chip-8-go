@@ -39,6 +39,18 @@ func TestC8_execOpcode(t *testing.T) {
 				pc:    2,
 			},
 		},
+		{
+			name: "test 00E0 opcode (clears the screen)",
+			args: args{
+				opcode: 0x00E0,
+			},
+			// doesn't do anything, aka screen should still be 0
+			// and draw that
+			want: &C8{
+				pc:       2,
+				DrawFlag: true,
+			},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
