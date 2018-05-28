@@ -40,6 +40,19 @@ func TestC8_execOpcode(t *testing.T) {
 			},
 		},
 		{
+			name: "test 1NNN opcode",
+			args: args{
+				opcode: 0x1FFF,
+			},
+			fields: fields{
+				stack: NewStack(),
+			},
+			want: &C8{
+				pc:    0xFFF,
+				stack: NewStack(),
+			},
+		},
+		{
 			name: "test 00E0 opcode (clears the screen)",
 			args: args{
 				opcode: 0x00E0,

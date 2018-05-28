@@ -23,6 +23,9 @@ func (c *C8) execOpcode(opcode uint16) *C8 {
 		c.setIndex(opcode & 0x0FFF)
 	case 0x1:
 		c.jumpTo(opcode & 0x0FFF)
+		// subtract two, to take into account the
+		// other +2 increment at the end of this function
+		c.pc -= 2
 	}
 
 	// after executing the opcode, advance
@@ -40,14 +43,11 @@ func (c *C8) clearScreen() {
 	var newGfx [64 * 32]uint8
 	c.gfx = newGfx
 }
-	c.gfx = newGfx
-}
 
 // jumpTo records the current program counter to
 // the stack, then sets the program counter to the
 // given address
 func (c *C8) jumpTo(addr uint16) {
-	c.stack.Push(c.pc)
 	c.pc = addr
 }
 
