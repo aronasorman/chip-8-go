@@ -23,6 +23,8 @@ func (c *C8) execOpcode(opcode uint16) *C8 {
 	// to set the index to NNN
 	case 0xA:
 		c.setIndex(opcode & 0x0FFF)
+	// the 1NNN opcode jumps to an address,
+	// without adding to the stack
 	case 0x1:
 		c.jumpTo(opcode & 0x0FFF)
 		// subtract two, to take into account the
