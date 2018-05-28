@@ -26,7 +26,7 @@ type C8 struct {
 	soundTimer uint8
 
 	// the stack and pointer
-	stack uint16
+	stack *Stack
 	sp    uint16
 
 	// the keypad
@@ -63,7 +63,8 @@ func (c *C8) Draw() {
 // systems initialized
 func NewC8() *C8 {
 	return &C8{
-		pc: 0x200,
+		pc:    0x200,
+		stack: NewStack(),
 	}
 
 	// load fontset on to 0x80 in memory

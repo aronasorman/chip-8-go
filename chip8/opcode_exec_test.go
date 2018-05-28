@@ -15,7 +15,7 @@ func TestC8_execOpcode(t *testing.T) {
 		gfx        [64 * 32]uint8
 		delayTimer uint8
 		soundTimer uint8
-		stack      uint16
+		stack      *Stack
 		sp         uint16
 		keypad     [16]uint8
 	}
