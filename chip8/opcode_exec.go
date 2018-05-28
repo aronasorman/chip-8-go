@@ -9,6 +9,8 @@ func (c *C8) execOpcode(opcode uint16) *C8 {
 	case 0x00E0:
 		c.clearScreen()
 		c.DrawFlag = true
+	case 0x00EE:
+		c.popStack()
 	}
 
 	// the other opcodes have arguments in them,
@@ -51,3 +53,13 @@ func (c *C8) jumpTo(addr uint16) {
 	c.pc = addr
 }
 
+// popStack sets the program counter to the last program
+// counter valuye before a jump
+func (c *C8) popStack() {
+	pc, err := c.stack.Pop()
+	if err != nil {
+		panic("empty stack popped")
+	}
+
+	c.pc = pc
+}

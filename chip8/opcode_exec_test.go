@@ -139,3 +139,53 @@ func TestC8_jumpTo(t *testing.T) {
 		})
 	}
 }
+
+func TestC8_popStack(t *testing.T) {
+	type fields struct {
+		DrawFlag   bool
+		memory     [4096]uint8
+		registers  [16]uint8
+		index      uint16
+		pc         uint16
+		gfx        [64 * 32]uint8
+		delayTimer uint8
+		soundTimer uint8
+		stack      *Stack
+		sp         uint16
+		keypad     [16]uint8
+	}
+	tests := []struct {
+		name   string
+		fields fields
+	}{
+		{
+			name: "popping and jumping should return to the same pc",
+			fields: fields{
+				pc:    0x500,
+				stack: NewStack(),
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c := &C8{
+				DrawFlag:   tt.fields.DrawFlag,
+				memory:     tt.fields.memory,
+				registers:  tt.fields.registers,
+				index:      tt.fields.index,
+				pc:         tt.fields.pc,
+				gfx:        tt.fields.gfx,
+				delayTimer: tt.fields.delayTimer,
+				soundTimer: tt.fields.soundTimer,
+				stack:      tt.fields.stack,
+				sp:         tt.fields.sp,
+				keypad:     tt.fields.keypad,
+			}
+			c.stack.Push(0x500)
+			c.popStack()
+			if pc := c.pc; pc != 0x500 {
+				t.Error("popStack not working")
+			}
+		})
+	}
+}
