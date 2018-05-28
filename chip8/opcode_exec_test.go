@@ -81,7 +81,7 @@ func TestC8_execOpcode(t *testing.T) {
 				keypad:     tt.fields.keypad,
 			}
 			if got := c.execOpcode(tt.args.opcode); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("C8.execOpcode() = %v, want %v", got, tt.want)
+				t.Errorf("C8.execOpcode() = %+v, want %+v", got, tt.want)
 			}
 		})
 	}
