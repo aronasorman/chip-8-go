@@ -81,10 +81,6 @@ func (c *C8) fetchOpcode() uint16 {
 	fullOpcode := opcode1<<8 | opcode2
 	return fullOpcode
 }
-	// merge the two bytes together
-	fullOpcode := opcode1<<8 | opcode2
-	return fullOpcode
-}
 
 func (c *C8) executeOpcode(opcode uint16) {
 	c.execOpcode(opcode)
