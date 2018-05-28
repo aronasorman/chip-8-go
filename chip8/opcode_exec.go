@@ -2,9 +2,15 @@ package chip8
 
 func (c *C8) execOpcode(opcode uint16) *C8 {
 
+	// the other opcodes have arguments in them,
+	// so get the first byte to determine
+	// what opcode it is
+	op := opcode >> 12
+
+	switch op {
 	// the ANNN opcode instructs the CPU
 	// to set the index to NNN
-	if (opcode & 0xF000) == 0xA000 {
+	case 0xA:
 		c.setIndex(opcode & 0x0FFF)
 	}
 
